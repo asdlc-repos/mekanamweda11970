@@ -1,0 +1,24 @@
+{
+  "overview": "A minimal single-page web application that serves a static 'Hello World' message to visitors. The architecture consists of a single frontend component that renders the greeting directly in the browser without requiring backend services or data persistence.",
+  "requirements": [
+    "The application must display 'Hello World' text when accessed in a web browser",
+    "The application must be accessible via HTTP/HTTPS",
+    "The application must provide a /health endpoint for monitoring",
+    "The application must load and render within 3 seconds",
+    "The application must be responsive and work on desktop and mobile browsers"
+  ],
+  "components": [
+    {
+      "name": "hello-world-app",
+      "componentType": "web-app",
+      "language": "TypeScript / React",
+      "dependsOn": [],
+      "entrypoint": "deployment/web-application",
+      "buildpack": "docker",
+      "appPath": "/hello-world-app",
+      "openAPISpec": "openapi: 3.0.3\ninfo:\n  title: Hello World Web Application\n  version: 1.0.0\n  description: A simple web application that displays Hello World\npaths:\n  /health:\n    get:\n      summary: Health check endpoint\n      operationId: healthCheck\n      responses:\n        '200':\n          description: Application is healthy\n          content:\n            application/json:\n              schema:\n                type: object\n                properties:\n                  status:\n                    type: string\n                    example: ok",
+      "componentAgentInstructions": "Implement a React-based single-page application using TypeScript and Vite as the build tool. Create a simple component that renders 'Hello World' in a centered div with clean typography. Use React 18+ with functional components. The app should include: 1) A main App.tsx component that displays 'Hello World' centered on the page with appropriate styling (use CSS modules or inline styles). 2) A /health endpoint served by the Vite dev server or implemented via a simple Express server for production builds that returns {status: 'ok'} with 200 status code. 3) Dockerfile that uses node:18-alpine as base, installs dependencies with npm ci, builds the production bundle with npm run build, and serves it using a lightweight HTTP server like serve or nginx on port 8080. 4) Package.json with scripts for dev, build, and start. 5) Basic responsive styling so the text is readable on mobile and desktop. 6) Minimal HTML template (index.html) that loads the React app. The component should be simple - no routing, no state management, no external API calls. Focus on clean code structure and a working Dockerfile. Environment: Node.js 18+, React 18+, TypeScript 5+, Vite 4+. Port: 8080 for production server."
+    }
+  ],
+  "sourceSpec": "spec-v1"
+}
